@@ -6,17 +6,16 @@
 #include <FastLED.h>
 #include <LEDMatrix.h>
 
+#include "config.h"
+
 #include "memorysaver.h"
 #if !(defined ESP8266 )
 #error Please select the ArduCAM ESP8266 UNO board in the Tools/Board
 #endif
 
-//Station mode you should put your ssid and password
-const char *ssid = "southofheaven"; // Put your SSID here
-const char *password = "papaja29"; // Put your PASSWORD here
+// https://forum.arduino.cc/index.php?topic=46900.0
+#define NODEBUG
 
-char serverAddress[] = "ns.rajewski.pl";  // server address
-int port = 80;
 
 int min = 80;
 int max = 160;
@@ -48,37 +47,26 @@ cLEDMatrix<MATRIX_WIDTH, MATRIX_HEIGHT, MATRIX_TYPE> leds;
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("ArduCAM Start!");
-  // put your setup code here, to run once:
-   if(!strcmp(ssid,"SSID")){
-       Serial.println("Please set your SSID");
-       while(1);
-    }
-    if(!strcmp(password,"PASSWORD")){
-       Serial.println("Please set your PASSWORD");
-       while(1);
-    }
-    // Connect to WiFi network
-    Serial.println();
-    Serial.println();
-    Serial.print("Connecting to ");
-    Serial.println(ssid);
-    
-    WiFi.mode(WIFI_STA);
-    WiFi.begin(ssid, password);
-    while (WiFi.status() != WL_CONNECTED) {
-      delay(500);
-      Serial.print(".");
-    }
-    Serial.println("WiFi connected");
-    Serial.println("");
-    Serial.println(WiFi.localIP());
 
-    FastLED.addLeds<CHIPSET, LED_PIN, COLOR_ORDER>(leds[0], leds.Size());
-    FastLED.setBrightness(2);
-    FastLED.clear(true);
-    delay(500);
+  // Connect to WiFi network
+  Serial.println();
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
     
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("WiFi connected");
+  Serial.println("");
+  Serial.println(WiFi.localIP());
+
+  FastLED.addLeds<CHIPSET, LED_PIN, COLOR_ORDER>(leds[0], leds.Size());
+  FastLED.setBrightness(2);
+  FastLED.clear(true);
+  delay(500);  
 }
 
 void loop() {
@@ -137,10 +125,10 @@ void loop() {
   unsigned long  cur_time = cur_time_s.toFloat();
   unsigned long  read_time = read_time_s.toFloat();
   
-  Serial.print("cur_time: ");
+  Serial.print("3 cur_time: ");
   Serial.println(cur_time);
   
-  Serial.print("read_time: ");
+  Serial.print("3 read_time: ");
   Serial.println(read_time);
 
   unsigned long parakeet_last_seen = cur_time - read_time ;
