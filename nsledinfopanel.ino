@@ -135,14 +135,14 @@ void loop() {
   Serial.print("I seen parakeet more then ");
   Serial.print(parakeet_last_seen);
   Serial.println(" seconds.");
-//  FastLED.clear(true);  
+  //  FastLED.clear(true);  
   if (parakeet_last_seen > 900) {
     // Lost parakeet signal after 900 seconds.
     
-//   lost_time = strftime("%d %b %Y %H:%M",localtime(read_time/1000))
-//  notify(title    = 'Nightscout read.',
-//          subtitle = strftime("%d %b %H:%M",localtime(cur_time/1000)),
-//          message  = 'I\'ve lost parakeet signal at: %s' % (lost_time))
+    //   lost_time = strftime("%d %b %Y %H:%M",localtime(read_time/1000))
+    //  notify(title    = 'Nightscout read.',
+    //          subtitle = strftime("%d %b %H:%M",localtime(cur_time/1000)),
+    //          message  = 'I\'ve lost parakeet signal at: %s' % (lost_time))
     Serial.println("I lost parakeet signal :(");
     FastLED.showColor(CRGB::Lime);
   }
@@ -160,18 +160,18 @@ void loop() {
     
     if (bgdelta > 0) {
       // Sugar is growing.
-//      bgdelta_s = "+%s" % bgdelta
+      //      bgdelta_s = "+%s" % bgdelta
     }
     else {
       // Sugar is dropping.
-//      bgdelta_s = "%s" % bgdelta
+      //      bgdelta_s = "%s" % bgdelta
     }
     
     if (bwpo < min) {
       // Sugar below minimum level.
- //     notify(title    = 'Nightscout read.',
- //            subtitle = '',
- //            message  = 'Sugar: %s, change: %s' % (bwpo, bgdelta_s))
+      //     notify(title    = 'Nightscout read.',
+      //            subtitle = '',
+      //            message  = 'Sugar: %s, change: %s' % (bwpo, bgdelta_s))
       Serial.print("Sugar: ");
       Serial.print(bwpo);
       Serial.print(", change:  ");
@@ -193,11 +193,10 @@ void loop() {
       FastLED.clear(true); 
       //FastLED.showColor(CRGB::Green);   
     }
-
   }
 
   Serial.println("Wait five seconds");
   delay(5000);
-//  FastLED.show();
+  //  FastLED.show();
 
 }
